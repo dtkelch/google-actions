@@ -7,7 +7,7 @@ import * as morgan from "morgan";
 import * as db from "../db";
 import * as compression from "compression";
 
-const knex = db.getConnection();
+// const knex = db.getConnection();
 const knexLogger = require("knex-logger");
 const enforce = require("express-sslify");
 const expressStaticGzip = require("express-static-gzip");
@@ -24,7 +24,7 @@ export const apiHost = config.get<string>("server.apiHost");
 export function startServer() {
   // Logging
   app.use(morgan("short"));
-  app.use(knexLogger(knex));
+  // app.use(knexLogger(knex));
 
   // Force SSL.
   if (config.get("server.requireSsl")) {
@@ -66,7 +66,7 @@ export function startServer() {
   }
 
   // Serve index.html for all unknown URLs
-  app.get("/*", function(req, res) {
+  app.get("/*", function (req, res) {
     res.sendFile(process.cwd() + "/dist/index.html");
   });
 
