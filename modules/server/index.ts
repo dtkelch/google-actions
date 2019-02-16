@@ -42,6 +42,15 @@ export function startServer() {
   // Gzip support
   app.use(compression());
 
+  app.use(
+    "/actions",
+    bodyParser.json(),
+    (req, res) => {
+      console.log('request', req);
+      console.log('res', res);
+    }
+  );
+
   // GraphQL
   app.use(
     "/graphql",
